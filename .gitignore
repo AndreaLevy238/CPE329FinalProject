@@ -49,3 +49,17 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+
+#files
+.metadata/
+.gradle/
+.jxbrowser-data/
+.settings/
+targetConfigs/
+
+#other
+.project
+.ccsproject
+.cproject
+*.ccxml
