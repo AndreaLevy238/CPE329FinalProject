@@ -15,6 +15,7 @@
  */
 #include "lcd.h"
 #include "msp.h"
+#include "timing.h"
 
 void LCD_init(int freq) {
     P5->DIR = 0xFF;     /* make P5 pins output for data and controls */
@@ -83,23 +84,34 @@ void displayMessage(char* msg, int length, int freq) {
     }
 }
 
-void displayTooCold(int freq) {
+void displayTooCold(int freq, int temperature) {
+   char* tempStr = getNumberString(temperature);
    LCD_command(1, freq);                   //clear display
    delayMs(500, freq);                     //cursor at beginning of first line
    LCD_command(0x80, freq);
    displayMessage("Too cold!", 9, freq);
    LCD_command(0xC0, freq);                //starts new line
-   displayMessage("Temp is NUM", 11, freq);
+   displayMessage("Temp is ", 8, freq);
+   displayMessage(tempStr, 2, freq);
+   LCD_data(' ', freq);
+   LCD_data(0xFD, freq);
+   LCD_data('C', freq);
    delayMs(500, freq);
+
 }
 
-void displayTooHot(int freq) {
+void displayTooHot(int freq, int temperature) {
+   char* tempStr = getNumberString(temperature);
    LCD_command(1, freq);                   //clear display
    delayMs(500, freq);                     //cursor at beginning of first line
    LCD_command(0x80, freq);
    displayMessage("Too hot!", 8, freq);
    LCD_command(0xC0, freq);                //starts new line
-   displayMessage("Temp is NUM", 11, freq);
+   displayMessage("Temp is ", 8, freq);
+   displayMessage(tempStr, 2, freq);
+   LCD_data(' ', freq);
+   LCD_data(0xFD, freq);
+   LCD_data('C', freq);
    delayMs(500, freq);
 }
 
@@ -112,3 +124,15 @@ void displayJustRight(int freq) {
    displayMessage("Enjoy! :)", 9, freq);
    delayMs(500, freq);
 }
+
+/*assumption that n is greater than 0 degrees Celcius*/
+char* getNumberString(int n) {
+    static char num[2];
+    char temp;
+    temp = n / 10;
+    num[0] = temp + '0';
+    temp -= n * 10;
+    num[1] = temp + '0';
+    return num;
+}
+

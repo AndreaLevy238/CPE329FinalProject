@@ -17,8 +17,9 @@ void LCD_command(unsigned char command, int freq);
 void LCD_data(unsigned char data, int freq);
 void LCD_init(int freq);
 void displayMessage(char *msg, int length, int freq);
-void displayTooCold(int freq);
-void displayTooHot(int freq);
+void displayTooCold(int freq, int temperature);
+void displayTooHot(int freq, int temperature);
 void displayJustRight(int freq);
+char* getNumberString(int n);
 
 #endif /* LCD_H_ */
