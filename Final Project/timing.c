@@ -41,7 +41,7 @@ void delayMs(int n, int freq) {
 /* creates a delay of n microseconds
  * assumption: freq = 24 MHz
  * */
-void delayNs(int n) {
+void delayNs(int n, int freq) {
     while (n > 1) {
         n--;
     }

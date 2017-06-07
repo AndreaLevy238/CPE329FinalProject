@@ -12,7 +12,7 @@ C_SRCS += \
 ../buzzer.c \
 ../lcd.c \
 ../main.c \
-../spi.c \
+../sensor.c \
 ../startup_msp432p401r_ccs.c \
 ../system_msp432p401r.c \
 ../timing.c 
@@ -21,7 +21,7 @@ C_DEPS += \
 ./buzzer.d \
 ./lcd.d \
 ./main.d \
-./spi.d \
+./sensor.d \
 ./startup_msp432p401r_ccs.d \
 ./system_msp432p401r.d \
 ./timing.d 
@@ -30,7 +30,7 @@ OBJS += \
 ./buzzer.obj \
 ./lcd.obj \
 ./main.obj \
-./spi.obj \
+./sensor.obj \
 ./startup_msp432p401r_ccs.obj \
 ./system_msp432p401r.obj \
 ./timing.obj 
@@ -39,7 +39,7 @@ OBJS__QUOTED += \
 "buzzer.obj" \
 "lcd.obj" \
 "main.obj" \
-"spi.obj" \
+"sensor.obj" \
 "startup_msp432p401r_ccs.obj" \
 "system_msp432p401r.obj" \
 "timing.obj" 
@@ -48,7 +48,7 @@ C_DEPS__QUOTED += \
 "buzzer.d" \
 "lcd.d" \
 "main.d" \
-"spi.d" \
+"sensor.d" \
 "startup_msp432p401r_ccs.d" \
 "system_msp432p401r.d" \
 "timing.d" 
@@ -57,7 +57,7 @@ C_SRCS__QUOTED += \
 "../buzzer.c" \
 "../lcd.c" \
 "../main.c" \
-"../spi.c" \
+"../sensor.c" \
 "../startup_msp432p401r_ccs.c" \
 "../system_msp432p401r.c" \
 "../timing.c" 

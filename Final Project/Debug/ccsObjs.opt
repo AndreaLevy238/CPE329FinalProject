@@ -1,1 +1,1 @@
-"./buzzer.obj" "./lcd.obj" "./main.obj" "./spi.obj" "./startup_msp432p401r_ccs.obj" "./system_msp432p401r.obj" "./timing.obj" "../msp432p401r.cmd" -llibc.a 
+"./buzzer.obj" "./lcd.obj" "./main.obj" "./sensor.obj" "./startup_msp432p401r_ccs.obj" "./system_msp432p401r.obj" "./timing.obj" "../msp432p401r.cmd" -llibc.a 

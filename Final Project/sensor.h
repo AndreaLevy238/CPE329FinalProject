@@ -8,9 +8,10 @@
 
 #define DATA_IN_PIN          BIT4
 #define VCC                  BIT3
-#define GND                  BIT1
+#define GND                  BIT5
 
 #define SKIP_ROM             0xCC
+#define WRITE_SCRATCHPAD     0x4E
 #define READ_SCRATCHPAD      0xBE
 #define CONVERT_T            0x44
 

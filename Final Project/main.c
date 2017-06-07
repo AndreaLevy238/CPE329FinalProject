@@ -15,14 +15,14 @@ int temperature;
 
 void main(void)
 {
-
+    temperature = 0;
+    setFreq(CS_CTL0_DCORSEL_4);
     buzzerInit();
-	SPI_init();
+	InitOneWire();
+	LCD_init(CS_CTL0_DCORSEL_4);
     WDTCTL = WDTPW | WDTHOLD;           // Stop watchdog timer
-    for (;;) {
-        temperature  = getData();
-        displayTooCold(CS_CTL0_DCORSEL_3, temperature);
-    }
+    temperature = getData(CS_CTL0_DCORSEL_4);
+    displayTooCold(CS_CTL0_DCORSEL_4, temperature);
 }
 
 void justRight(int freq) {

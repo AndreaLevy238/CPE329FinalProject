@@ -13,7 +13,7 @@ ORDERED_OBJS += \
 "./buzzer.obj" \
 "./lcd.obj" \
 "./main.obj" \
-"./spi.obj" \
+"./sensor.obj" \
 "./startup_msp432p401r_ccs.obj" \
 "./system_msp432p401r.obj" \
 "./timing.obj" \
@@ -159,8 +159,8 @@ Final\ Project.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "buzzer.obj" "lcd.obj" "main.obj" "spi.obj" "startup_msp432p401r_ccs.obj" "system_msp432p401r.obj" "timing.obj" 
-	-$(RM) "buzzer.d" "lcd.d" "main.d" "spi.d" "startup_msp432p401r_ccs.d" "system_msp432p401r.d" "timing.d" 
+	-$(RM) "buzzer.obj" "lcd.obj" "main.obj" "sensor.obj" "startup_msp432p401r_ccs.obj" "system_msp432p401r.obj" "timing.obj" 
+	-$(RM) "buzzer.d" "lcd.d" "main.d" "sensor.d" "startup_msp432p401r_ccs.d" "system_msp432p401r.d" "timing.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
