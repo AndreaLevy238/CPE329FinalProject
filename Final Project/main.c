@@ -8,7 +8,7 @@
 #include "timing.h"
 #include "lcd.h"
 #include "buzzer.h"
-#include "spi.h"
+#include "sensor.h"
 
 void justRight(int freq);
 int temperature;
@@ -20,7 +20,7 @@ void main(void)
 	SPI_init();
     WDTCTL = WDTPW | WDTHOLD;           // Stop watchdog timer
     for (;;) {
-        temperature  = getTemperature();
+        temperature  = getData();
         displayTooCold(CS_CTL0_DCORSEL_3, temperature);
     }
 }
