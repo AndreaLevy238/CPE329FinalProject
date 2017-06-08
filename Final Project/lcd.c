@@ -94,7 +94,7 @@ void displayTooCold(int freq, int temperature) {
    displayMessage("Temp is ", 8, freq);
    displayMessage(tempStr, 2, freq);
    LCD_data(' ', freq);
-   LCD_data(0xFD, freq);
+   LCD_data(0xDF, freq);
    LCD_data('C', freq);
    delayMs(500, freq);
 
@@ -110,7 +110,7 @@ void displayTooHot(int freq, int temperature) {
    displayMessage("Temp is ", 8, freq);
    displayMessage(tempStr, 2, freq);
    LCD_data(' ', freq);
-   LCD_data(0xFD, freq);
+   LCD_data(0xDF, freq);
    LCD_data('C', freq);
    delayMs(500, freq);
 }
@@ -131,8 +131,8 @@ char* getNumberString(int n) {
     char temp;
     temp = n / 10;
     num[0] = temp + '0';
-    temp -= n * 10;
-    num[1] = temp + '0';
+    n -= (temp * 10);
+    num[1] = n + '0';
     return num;
 }
 

@@ -7,17 +7,17 @@
 #include "msp.h"
 
 void buzzerInit() {
-    P2->DIR |= BIT5;
-    P2->SEL1 &= ~BIT5;         /* configure P2.1 as simple I/O */
-    P2->SEL0 &= ~BIT5;
-    P2->OUT &= ~BIT5;
+    P2->DIR |= BIT6;
+    P2->SEL1 &= ~BIT6;         /* configure P2.1 as simple I/O */
+    P2->SEL0 &= ~BIT6;
+    P2->OUT &= ~BIT6;
 }
 
 
 void buzzerOn(int ms, int freq) {
-    P2->OUT |= BIT5;
+    P2->OUT |= BIT6;
     delayMs(ms, freq);
-    P2->OUT &= ~BIT5;
+    P2->OUT &= ~BIT6;
 }
 
 

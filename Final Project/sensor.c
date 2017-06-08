@@ -106,14 +106,16 @@ void WriteOneWire (unsigned char data,int power, int freq) {
 
 int16_t ReadOneWire (int freq) {
     unsigned int i;
+    int temp = 0;
     int16_t data = 0;
     P2->DIR &= ~DATA_IN_PIN; //set port in input mode
     for(i=16; i>0; i--) {
-        data = data << 1;
+        temp = temp >> 1;
         if (ReadBit(freq) == 1) {
-            data |= 0x0001;
+            temp |= 0x8000;
         }
     }
+    data = (int16_t) temp;
     return data;
 
 }
