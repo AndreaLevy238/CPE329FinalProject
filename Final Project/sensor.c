@@ -3,6 +3,8 @@
  *
  *  Created on: Jun 6, 2017
  *      Author: Andrea
+ * adapted from:
+ * we found that the timing maps to us_actual = 2.416*us_desired - 2.039
  */
 #include "msp.h"
 #include "sensor.h"
@@ -28,10 +30,10 @@ unsigned int ResetOneWire(int freq) {
      */
     int device_present;
     OneWire_LO(); //Drive bus low
-    delayNs(480, freq); //hold for 480us
+    delayNs(1157, freq); //hold for 480us
     P2->DIR &= ~DATA_IN_PIN; //release bus
     device_present = (P2->IN & DATA_IN_PIN) ? 1 : 0;
-    delayNs(480, freq); //hold for 480us
+    delayNs(1157, freq); //hold for 480us
     return device_present;
 }
 void OneWire_HI(void){
@@ -51,9 +53,9 @@ void WriteZero(int freq) {
      * wait for 1us for recovery
      */
     OneWire_LO();
-    delayNs(60, freq);
+    delayNs(143, freq); //delay for 60us
     P2->DIR &= ~DATA_IN_PIN; //release bus
-    delayNs(1, freq);
+    delayNs(1, freq); //delay for 1 us
 }
 void WriteOne(int freq) {
    /* Steps for master to transmit logical one to slave device on bus
@@ -62,26 +64,26 @@ void WriteOne(int freq) {
     * wait for 1us for recovery
     */
     OneWire_LO();
-    delayNs(5, freq);
+    delayNs(10, freq); //delay 5us
     P2->DIR &= ~DATA_IN_PIN; //release bus
-    delayNs(56, freq); //sample time slot for slave
+    delayNs(133, freq); //sample time slot for slave, 56us
 }
 unsigned int ReadBit(int freq) {
     /*Steps for master to issue a read request to slave device on bus
      * pull bus low
      * hold for 5us
      * release bus
-     * wait for 45us for recovery
+     * wait for 46us for recovery
      */
     unsigned int bit = 0;
     OneWire_LO();
-    delayNs(5, freq);
+    delayNs(10, freq); //delay for 5us
     P2->DIR &= ~DATA_IN_PIN; //release bus
-    delayNs(10, freq);
+    delayNs(10, freq); //delay for 5us
     if (P2->IN & DATA_IN_PIN) {
         bit = 1;
     }
-    delayNs(46, freq);
+    delayNs(110, freq); //delay for  46us
     return bit;
 
 }
@@ -101,21 +103,22 @@ void WriteOneWire (unsigned char data,int power, int freq) {
         delayMs(10, freq);
     }
 }
-unsigned int ReadOneWire (int freq) {
+
+int16_t ReadOneWire (int freq) {
     unsigned int i;
-    unsigned int data = 0;
+    int16_t data = 0;
     P2->DIR &= ~DATA_IN_PIN; //set port in input mode
     for(i=16; i>0; i--) {
-        data= data >> 1;
-        if (ReadBit(freq)) {
-            data |= 0x8000;
+        data = data << 1;
+        if (ReadBit(freq) == 1) {
+            data |= 0x0001;
         }
     }
     return data;
 
 }
-int getData(int freq) {
-    unsigned int temp;
+int16_t getData(int freq) {
+    int16_t temp;
     ResetOneWire(freq);
     WriteOneWire(SKIP_ROM, 0, freq);
     WriteOneWire(CONVERT_T, 1, freq);

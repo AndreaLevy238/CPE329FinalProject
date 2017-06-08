@@ -23,8 +23,8 @@ void WriteZero(int freq);
 void WriteOne(int freq);
 unsigned int ReadBit(int freq);
 void WriteOneWire (unsigned char data,int power, int freq);
-unsigned int ReadOneWire (int freq);
-int getData(int freq);
+int16_t ReadOneWire (int freq);
+int16_t getData(int freq);
 
 
 

@@ -11,7 +11,8 @@
 #include "sensor.h"
 
 void justRight(int freq);
-int temperature;
+int16_t getTemperature(int16_t data);
+int16_t temperature;
 
 void main(void)
 {
@@ -23,10 +24,17 @@ void main(void)
     WDTCTL = WDTPW | WDTHOLD;           // Stop watchdog timer
     temperature = getData(CS_CTL0_DCORSEL_4);
     displayTooCold(CS_CTL0_DCORSEL_4, temperature);
+
 }
 
 void justRight(int freq) {
     buzzerOn(BUZZER_PERIOD, freq);
     displayJustRight(freq);
+}
+
+int16_t getTemperature(int16_t data) {
+    if (data < 0) {
+        data = -data;
+    }
 }
 
